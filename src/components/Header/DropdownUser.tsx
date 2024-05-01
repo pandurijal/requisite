@@ -60,6 +60,8 @@ const DropdownUser = () => {
         const customerDataFields = customers?.[0]?.fields;
         setCustomerData(customerDataFields);
         setLocalStorage("req-customer", customerDataFields);
+
+        window.location.reload();
       }
     }
   };
