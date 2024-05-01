@@ -4,10 +4,15 @@ import Image from "next/image";
 import getCustomer from "@/services";
 import { getLocalStorage, setLocalStorage } from "@/utils";
 
+interface CustomerData {
+  "Company name": string;
+  "Seats in use": string;
+}
+
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [customers, setCustomers] = useState([]);
-  const [customerData, setCustomerData] = useState({});
+  const [customerData, setCustomerData] = useState<any>(null);
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
@@ -46,7 +51,7 @@ const DropdownUser = () => {
     const customers = await getCustomer();
     const customerDataStorage = await getLocalStorage("req-customer");
     if (customers) {
-      const customerFields = customers.map((val) => val.fields);
+      const customerFields = customers.map((val) => val.fields) as any;
       setCustomers(customerFields);
 
       if (customerDataStorage) {
